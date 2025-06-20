@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "basic_python_app"
+version = "0.1.0"
+description = "Demo hello-world package"
+readme = "README.md"
+authors = [
+    {name = "Macbucheron"}
+]
+requires-python = ">=3.9"
+
+[project.scripts]
+basic_python_app = "basic_python_app.HelloWorld:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

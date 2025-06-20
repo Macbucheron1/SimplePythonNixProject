@@ -12,6 +12,7 @@
         pname = "basic_python_app";
         version = "0.1.0";
         src = ./.;
+        format = "pyproject";
       };
     in {
       packages.${system} = {

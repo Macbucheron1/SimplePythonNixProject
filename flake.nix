@@ -11,7 +11,7 @@
       myApp = pkgs.python3Packages.buildPythonApplication {
         pname = "basic_python_app";
         version = "0.1.0";
-        src = ./.;
+        src = ./src;
       };
     in {
       packages.${system} = {

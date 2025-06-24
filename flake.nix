@@ -77,6 +77,7 @@
         buildInputs = [
           python311
           hatchling
+          pytest
         ];
       };
     };

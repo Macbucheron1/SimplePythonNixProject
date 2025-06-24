@@ -18,9 +18,6 @@ jobs:
         with:
           nix_path: nixpkgs=channel:nixos-25.05
 
-      - name: Update flake inputs
-        run: nix flake update --recreate-lock-file
-
       - name: Build Nix package
         run: nix build
 
@@ -36,9 +33,6 @@ jobs:
         uses: cachix/install-nix-action@v17
         with:
           nix_path: nixpkgs=channel:nixos-25.05
-
-      - name: Update flake inputs
-        run: nix flake update --recreate-lock-file
 
       - name: Build Docker image
         run: nix build .#image

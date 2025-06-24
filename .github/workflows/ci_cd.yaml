@@ -50,7 +50,7 @@ jobs:
       - name: Extract version
         id: version
         run: |
-          echo "VERSION=$(nix eval --raw .#basic_python_app.version)" >> $GITHUB_ENV
+          echo "VERSION=$(nix eval --raw .#default.version)" >> $GITHUB_ENV
 
       - name: Tag Docker image for GHCR
         run: |

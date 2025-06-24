@@ -17,6 +17,21 @@ When developping your package you can enter the dev shell using:
 nix develop
 ```
 
+The dev shell is shell that contains everything you defined inside of your [flaxe.nix](./flake.nix).
+```bash
+user@host:~/Documents/basic_python$ python3 --version 
+Python 3.10.12
+user@host:~/Documents/basic_python$ nix develop
+warning: Git tree '/home/user/Documents/basic_python' is dirty
+user@host:~/Documents/basic_python$ python3 --version
+Python 3.11.12
+user@host:~/Documents/basic_python$ exit
+exit
+user@host:~/Documents/basic_python$ python3 --version
+Python 3.10.12
+```
+Therefore you can use any python version you want and switch between versions easly
+
 ### Building
 To build your package you can use the nix command
 ```nix

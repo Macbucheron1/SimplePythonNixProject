@@ -21,15 +21,15 @@
       pkgs = import nixpkgs { inherit system; };
 
       # Define the Python version and the application package.
-      python310 = pkgs.python310;
-      hatchling = python310.pkgs.hatchling;
-      pytest = python310.pkgs.pytest;
+      python311 = pkgs.python311;
+      hatchling = python311.pkgs.hatchling;
+      pytest = python311.pkgs.pytest;
 
 
 
       # Define the Python application package using hatchling for building.
       # This assumes you have a basic Python project structure with a pyproject.toml.
-      myApp = python310.pkgs.buildPythonPackage {
+      myApp = python311.pkgs.buildPythonPackage {
         pname = "basic_python_app";
         version = "0.1.0";
         src = ./.;
@@ -75,7 +75,7 @@
         # We use buildInputs to specify the dependencies needed in the development shell.
         # This includes the Python interpreter and hatchling for building the application.
         buildInputs = [
-          python310
+          python311
           hatchling
         ];
       };

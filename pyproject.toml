@@ -7,10 +7,14 @@ name = "basic_python_app"
 version = "0.1.0"
 description = "A very basic application"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.9,<3.12"
 authors = [
     {name = "Mac"}
 ]
 
 [project.scripts]
 basic_python_app = "basic_python_app.__main__:main"
+
+[project.optional-dependencies]
+dev = [
+]

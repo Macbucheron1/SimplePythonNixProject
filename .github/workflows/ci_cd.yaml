@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v17
+        with:
+          nix_path: nixpkgs=channel:nixos-25.05
+
+      - name: Update flake inputs
+        run: nix flake update --recreate-lock-file
+
+      - name: Build Nix package
+        run: nix build
+
+
+  publish:
+    needs: build-test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v17
+        with:
+          nix_path: nixpkgs=channel:nixos-25.05
+
+      - name: Update flake inputs
+        run: nix flake update --recreate-lock-file
+
+      - name: Build Docker image
+        run: nix build .#image
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Load Docker image
+        run: docker load < result
+
+      - name: Extract version
+        id: version
+        run: |
+          echo "VERSION=$(nix eval --raw .#basic_python_app.version)" >> $GITHUB_ENV
+
+      - name: Tag Docker image for GHCR
+        run: |
+          docker tag basic_python_app:${VERSION} ghcr.io/${{ github.repository_owner }}/basic_python_app:${VERSION}
+
+      - name: Push to GHCR
+        run: |
+          docker push ghcr.io/${{ github.repository_owner }}/basic_python_app:${VERSION}

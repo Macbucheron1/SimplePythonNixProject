@@ -7,11 +7,12 @@
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system; };
-
-      myApp = pkgs.python3Packages.buildPythonApplication {
+      myApp = pkgs.python3.pkgs.buildPythonPackage {
         pname = "basic_python_app";
         version = "0.1.0";
-        src = ./src;
+        src = ./.;
+        format = "pyproject";
+        nativeBuildInputs = [ pkgs.python3Packages.hatchling ];
       };
     in {
       packages.${system} = {

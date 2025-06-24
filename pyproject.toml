@@ -1,0 +1,24 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "basic_python_app"
+version = "0.1.0"
+description = "Une application Python basique"
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [
+    {name = "Mac"}
+]
+
+[project.scripts]
+basic-python-app = "basic_python_app.__main__:main"   # nouveau point d’entrée
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+# ➜ laissez setuptools découvrir le package automatiquement :
+[tool.setuptools.packages.find]
+where = ["src"]
+exclude = ["tests*"]

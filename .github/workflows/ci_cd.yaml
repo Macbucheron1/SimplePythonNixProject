@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main ]
   pull_request:
-    branches: [ main ]
+    branches: [ main ]        
 
 jobs:
   build-test:
@@ -23,6 +23,9 @@ jobs:
 
 
   publish:
+    permissions:
+      contents: read         
+      packages: write
     needs: build-test
     runs-on: ubuntu-latest
     steps:

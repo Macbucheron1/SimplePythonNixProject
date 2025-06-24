@@ -22,6 +22,10 @@
 
       # Define the Python version and the application package.
       python310 = pkgs.python310;
+      hatchling = python310.pkgs.hatchling;
+      pytest = python310.pkgs.pytest;
+
+
 
       # Define the Python application package using hatchling for building.
       # This assumes you have a basic Python project structure with a pyproject.toml.
@@ -30,7 +34,11 @@
         version = "0.1.0";
         src = ./.;
         format = "pyproject";
-        nativeBuildInputs = [ python310.pkgs.hatchling ];
+        nativeBuildInputs = [ hatchling pytest ];
+        doCheck = true;
+        checkPhase = ''
+          pytest tests
+        '';
       };
     # End of let expression. We can now use the defined variables in let.
     # This is where we define the outputs of the flake.
@@ -68,7 +76,7 @@
         # This includes the Python interpreter and hatchling for building the application.
         buildInputs = [
           python310
-          python310.hatchling
+          hatchling
         ];
       };
     };

@@ -8,7 +8,7 @@ from basic_python_app.__main__ import main
 
 def test_main_output():
     """
-    Test que la fonction main() affiche correctement le message attendu.
+    Test the output of the main() function.
     """
     with patch('sys.stdout', new=StringIO()) as fake_out:
         main()
@@ -16,10 +16,10 @@ def test_main_output():
 
 def test_main_execution():
     """
-    Test que la fonction main() s'exécute sans erreur.
+    Test the execution of the main() function without exceptions.
     """
     try:
         main()
         assert True
     except Exception as e:
-        pytest.fail(f"L'exécution de main() a levé une exception: {e}")
+        pytest.fail(f"The execution of main() raised an exception: {e}")

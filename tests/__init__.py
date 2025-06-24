@@ -1,3 +1,3 @@
 """
-Package de tests pour basic_python_app.
+Test suite for the basic_python_app module.
 """

@@ -54,8 +54,9 @@ jobs:
 
       - name: Tag Docker image for GHCR
         run: |
-          docker tag basic_python_app:${VERSION} ghcr.io/${{ github.repository_owner }}/basic_python_app:${VERSION}
+          docker tag basic_python_app:${VERSION} ghcr.io/${{ github.repository_owner | toLower }}/basic_python_app:${VERSION}
+
 
       - name: Push to GHCR
         run: |
-          docker push ghcr.io/${{ github.repository_owner }}/basic_python_app:${VERSION}
+          docker push ghcr.io/${{ github.repository_owner | toLower }}/basic_python_app:${VERSION}
